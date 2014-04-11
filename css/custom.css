@@ -1,0 +1,17 @@
+#mainmenu ul li:hover > ul {
+	display: block;
+}
+
+.dropdown > ul {
+	display: none;
+	position: absolute;
+	background: #3498db;
+	padding: 0px!important;
+	padding-bottom: 7px!important;
+	margin-top: 5px!important;
+}
+
+.dropdown > ul li {
+	display: block!important;
+	margin-top: 10px;
+}
