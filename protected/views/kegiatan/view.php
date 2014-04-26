@@ -24,7 +24,7 @@ $this->menu=array(
 		'id',
 		'nama',
 		'deskripsi',
-		'waktu',
+		'waktu_kegiatan',
 		'id_lab',
 	),
 )); ?>

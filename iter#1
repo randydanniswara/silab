@@ -10,3 +10,16 @@ Update Aset						()
 Delete Lab						(x)
 Kirim Pesan						()
 Download Dokumen				()
+
+
+CRUD account 	(x)
+CRUD Lab		(x)
+CRUD Kegiatan	(x)
+CRUD Aset		(x)
+CRUD Publikasi	()
+Dokumen			()
+
+
+
+
+Di kegiatan => ketua cuman bisa upload berita kegiatan tentang Lab nya aja

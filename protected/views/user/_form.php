@@ -25,10 +25,17 @@
 		<?php echo $form->error($model,'username'); ?>
 	</div>
 
+
 	<div class="row">
-		<?php echo $form->labelEx($model,'password'); ?>
+		<?php echo $form->labelEx($model,'new password'); ?>
 		<?php echo $form->passwordField($model,'password',array('size'=>32,'maxlength'=>32)); ?>
 		<?php echo $form->error($model,'password'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'verify new password'); ?>
+		<?php echo $form->passwordField($model,'samePassword',array('size'=>32,'maxlength'=>32)); ?>
+		<?php echo $form->error($model,'samePassword'); ?>
 	</div>
 
 	<div class="row">
@@ -44,15 +51,35 @@
 	</div>
 
     <div class="row">
-		<?php echo $form->labelEx($model,'lab'); ?>
-		<?php echo $form->dropDownList($model,'id',CHtml::listData(Lab::model()->findAll(),'id','nama'), array('empty'=>'Pilih Lab Anda!')); ?>
-		<?php echo $form->error($model,'lab'); ?>
+		<?php echo $form->labelEx($lab,'id_lab'); ?>
+		<?php echo $form->dropDownList($lab,'id_lab',CHtml::listData(Lab::model()->findAll(),'id','nama'), array('empty'=>'Pilih Lab Anda!')); ?>
+		<?php echo $form->error($lab,'id_lab'); ?>
 	</div>
+
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>
 
+
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
+
+
+<script type="text/javascript">
+	// $("#User_role").click(function(){
+	// 	var x  = $("#User_role").val();
+	// 	console.log(x);
+	// });
+	// var val;
+	// $('#User_role').change(function() {
+	//  var newVal = $(this).val();
+	//  console.log(newVal);
+	//  for(var i=0; i<newVal.length; i++) {
+	//      if($.inArray(newVal[i], val) == -1)
+	//        alert($(this).find('option[value="' + newVal[i] + '"]').text());
+	//  }
+	//  val = newVal;
+	// }); ​
+</script>

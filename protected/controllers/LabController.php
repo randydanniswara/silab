@@ -6,7 +6,7 @@ class LabController extends Controller
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
-	public $layout='//layouts/admin';
+	public $layout='//layouts/column2';
 
 	/**
 	 * @return array action filters
@@ -27,8 +27,16 @@ class LabController extends Controller
 	public function accessRules()
 	{
 		return array(
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('index','view'),
+				'users'=>array('*'),
+			),
+			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+				'actions'=>array('update'),
+				'users'=>array('@'),
+			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('index','view','admin','delete','create','update'),
+				'actions'=>array('admin','delete','create'),
 				'expression'=>'$user->getRole()<=2',
 			),
 			array('deny',  // deny all users
@@ -43,10 +51,8 @@ class LabController extends Controller
 	 */
 	public function actionView($id)
 	{
-		$anggota = Lab::model()->getAnggota($id);
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
-			'anggota'=>$anggota,
 		));
 	}
 
@@ -67,11 +73,15 @@ class LabController extends Controller
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
+		
 
 		$this->render('create',array(
 			'model'=>$model,
+			'list'=>Lab::model()->genList(),
 		));
 	}
+
+	
 
 	/**
 	 * Updates a particular model.
@@ -81,7 +91,6 @@ class LabController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -94,6 +103,7 @@ class LabController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
+			'list'=>Lab::model()->genList(),
 		));
 	}
 
@@ -116,9 +126,11 @@ class LabController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Lab', array('sort'=>array('defaultOrder'=>'id ASC')));
+		$dataProvider=new CActiveDataProvider('Lab');
+		$list = Lab::model()->genList();
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
+			'list'=>$list,
 		));
 	}
 

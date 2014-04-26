@@ -26,6 +26,11 @@
 		<?php echo $form->textArea($model,'profil',array('rows'=>6, 'cols'=>50)); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->label($model,'id_ketua'); ?>
+		<?php echo $form->textField($model,'id_ketua'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Search'); ?>
 	</div>

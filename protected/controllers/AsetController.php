@@ -59,16 +59,20 @@ class AsetController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
+		$id_ketua = Yii::app()->user->id;	
+		$lab = Lab::model()->find("id_ketua=:x",array("x"=>$id_ketua));
+		
 		if(isset($_POST['Aset']))
 		{
 			$model->attributes=$_POST['Aset'];
+			$model->id_lab = $lab->id;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
+			'lab'=>$lab,
 		));
 	}
 
@@ -84,6 +88,9 @@ class AsetController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
+		$id_ketua = Yii::app()->user->id;	
+		$lab = Lab::model()->find("id_ketua=:x",array("x"=>$id_ketua));
+		
 		if(isset($_POST['Aset']))
 		{
 			$model->attributes=$_POST['Aset'];
@@ -93,6 +100,7 @@ class AsetController extends Controller
 
 		$this->render('update',array(
 			'model'=>$model,
+			'lab'=>$lab,
 		));
 	}
 

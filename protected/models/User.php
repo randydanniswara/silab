@@ -24,7 +24,10 @@
  */
 class User extends CActiveRecord
 {
-	private $oldPassword;
+	public $oldPassword;
+	public $checkPassword;
+	public $samePassword;
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -41,9 +44,14 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username, password, email', 'required'),
+			array('username, email', 'required'),
+			array('username','unique','message'=>'Username sudah terdaftar'),
+			array('email','email','message'=>'Email tidak valid'),
+			array('email','unique','message'=>'Email sudah terdaftar'),
 			array('role', 'numerical', 'integerOnly'=>true),
 			array('username, password, email', 'length', 'max'=>32),
+			array('samePassword','length','max'=>32,'min' => 6),
+			array('samePassword','compare','compareAttribute'=>'password'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('username, password, email, id, role', 'safe', 'on'=>'search'),
@@ -133,6 +141,10 @@ class User extends CActiveRecord
 		return md5($password);
 	}
 
+	protected function beforeValidation() {
+		$this->checkPassword = $this->hashPassword($this->checkPassword);
+	}
+
 	protected function afterFind() {
 		$this->oldPassword = $this->password;
 	}
@@ -141,6 +153,10 @@ class User extends CActiveRecord
 		if ($this->password == NULL || $this->password == ''){
 			$this->password = $this->oldPassword;
 		}
+		$this->checkPassword = $this->hashPassword($this->checkPassword);
+		$this->password = $this->hashPassword($this->password);
+		$this->samePassword = $this->hashPassword($this->samePassword);
+		
 		return true;
 	}
 

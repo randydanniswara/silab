@@ -5,9 +5,6 @@
 
 <div class="view">
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
-	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('nama')); ?>:</b>
 	<?php echo CHtml::encode($data->nama); ?>
@@ -17,8 +14,8 @@
 	<?php echo CHtml::encode($data->deskripsi); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('waktu')); ?>:</b>
-	<?php echo CHtml::encode($data->waktu); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('waktu_kegiatan')); ?>:</b>
+	<?php echo CHtml::encode($data->waktu_kegiatan); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('id_lab')); ?>:</b>

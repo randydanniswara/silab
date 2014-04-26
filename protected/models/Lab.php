@@ -7,12 +7,14 @@
  * @property integer $id
  * @property string $nama
  * @property string $profil
+ * @property integer $id_ketua
  *
  * The followings are the available model relations:
  * @property Kegiatan[] $kegiatans
  * @property Aset[] $asets
  * @property User[] $users
  * @property Dokumentasi[] $dokumentasis
+ * @property User $idKetua
  * @property Publikasi[] $publikasis
  * @property LogBook[] $logBooks
  */
@@ -34,13 +36,13 @@ class Lab extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id, nama', 'required'),
-			array('id', 'numerical', 'integerOnly'=>true),
+			array('nama', 'required'),
+			array('id_ketua', 'numerical', 'integerOnly'=>true),
 			array('nama', 'length', 'max'=>50),
 			array('profil', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, nama, profil, blah', 'safe', 'on'=>'search'),
+			array('id, nama, profil, id_ketua', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -56,6 +58,7 @@ class Lab extends CActiveRecord
 			'asets' => array(self::HAS_MANY, 'Aset', 'id_lab'),
 			'users' => array(self::MANY_MANY, 'User', 'Lab_User(id_lab, id_user)'),
 			'dokumentasis' => array(self::HAS_MANY, 'Dokumentasi', 'id_lab'),
+			'idKetua' => array(self::BELONGS_TO, 'User', 'id_ketua'),
 			'publikasis' => array(self::HAS_MANY, 'Publikasi', 'id_lab'),
 			'logBooks' => array(self::HAS_MANY, 'LogBook', 'id_lab'),
 		);
@@ -70,6 +73,7 @@ class Lab extends CActiveRecord
 			'id' => 'ID',
 			'nama' => 'Nama',
 			'profil' => 'Profil',
+			'id_ketua' => 'Id Ketua',
 		);
 	}
 
@@ -94,6 +98,7 @@ class Lab extends CActiveRecord
 		$criteria->compare('id',$this->id);
 		$criteria->compare('nama',$this->nama,true);
 		$criteria->compare('profil',$this->profil,true);
+		$criteria->compare('id_ketua',$this->id_ketua);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -112,10 +117,29 @@ class Lab extends CActiveRecord
 	}
 
 	public function getAnggota($id_lab) {
+		$lab = new Lab();
+		
 		$sql = 'SELECT * FROM "Profil" WHERE "id" IN 
 					(SELECT "id" FROM "User" WHERE "id" IN 
 						(SELECT "id_user" FROM "Lab_User" WHERE "id_lab"='.$id_lab.'))'; 
 		$command = Yii::app()->db->createCommand($sql);
 		return $command->query();
+	}
+
+	public function genList() {
+		$x = User::model()->findAll('role=:p',array('p'=>'2'));
+		$list = array();
+		 foreach ($x as $key) {
+		 	$m = $key->profil->getDetail();
+		 	$tmp = ""; $po=0;
+		 	foreach ($m as $k => $v) {
+		 		if ($k == "id") $po = $v;  
+		 		if ($k =="nama_depan" || $k == "nama_belakang")	
+		 			$tmp= $tmp." ".$v;
+		 	}
+		 	$list[$po] = $tmp;
+		}
+
+		return $list;
 	}
 }

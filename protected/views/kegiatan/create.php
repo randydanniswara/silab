@@ -13,6 +13,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Create Kegiatan</h1>
+<h1>Create Kegiatan Lab <?php echo $lab->nama; ?></h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php $this->renderPartial('_form', array('model'=>$model,'lab'=>$lab::model())); ?>

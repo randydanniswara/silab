@@ -39,7 +39,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'Nama Lab'); ?>
-		<?php echo $form->dropDownList($model,'id_lab',CHtml::listData(Lab::model()->findAll(),'id','nama'), array('empty'=>'Pilih Lab Anda')); ?>
+		<?php echo $form->textField($model,'id_lab',array('value'=>$lab->nama,'disabled'=>'disabled'))?>
 		<?php echo $form->error($model,'id_lab'); ?>
 	</div>
 

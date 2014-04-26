@@ -15,6 +15,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/custom.css" />
+	<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/assets/js/jquery.js"></script>
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
@@ -45,6 +46,8 @@
 				array('label'=>'Labs', 'url'=>array('/lab/index'),'visible'=>Yii::app()->user->getRole()<=2),
 				array('label'=>'Profil','url'=>array('/profil/index'),'visible'=>!Yii::app()->user->isGuest),
 				array('label'=>'User','url'=>array('/user/index'),'visible'=>Yii::app()->user->getRole()<=2),
+				array('label'=>'Dokumen','url'=>array('/dokumen/index'),'visible'=>Yii::app()->user->getRole()==2),
+				array('label'=>'Kegiatan','url'=>array('/kegiatan/index'),'visible'=>!Yii::app()->user->isGuest),
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'LogBook','url'=>array('logbook/index'),'visible'=>Yii::app()->user->getRole()==3 && !Yii::app()->user->isGuest),
 				array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)

@@ -15,4 +15,4 @@ $this->menu=array(
 
 <h1>Create User</h1>
 
-<?php $this->renderPartial('_form', array('model'=>$model, 'lab'=>Lab::model())); ?>
+<?php $this->renderPartial('_form', array('model'=>$model, 'lab'=>LabUser::model())); ?>

@@ -8,7 +8,7 @@
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Sistem Informasi Lab Riset Fasilkom UI',
-
+	// 'theme'=>'night',
 	// preloading 'log' component
 	'preload'=>array('log'),
 
@@ -29,7 +29,7 @@ return array(
 		),
 		
 	),
-
+	'timeZone' => 'Asia/Jakarta',
 	// application components
 	'components'=>array(
 		'user'=>array(
@@ -41,6 +41,8 @@ return array(
 		
 		'urlManager'=>array(
 			'urlFormat'=>'path',
+			'showScriptName'=>false,
+			'caseSensitive'=>false,
 			'rules'=>array(
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',

@@ -31,8 +31,8 @@ class Kegiatan extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id, nama, deskripsi, waktu, id_lab', 'required'),
-			array('id, id_lab', 'numerical', 'integerOnly'=>true),
+			array('nama, deskripsi, waktu, id_lab', 'required'),
+			array('id_lab', 'numerical', 'integerOnly'=>true),
 			array('nama', 'length', 'max'=>50),
 			array('waktu', 'length', 'max'=>30),
 			// The following rule is used by search().
@@ -63,7 +63,7 @@ class Kegiatan extends CActiveRecord
 			'nama' => 'Nama',
 			'deskripsi' => 'Deskripsi',
 			'waktu' => 'Waktu',
-			'id_lab' => 'Id Lab',
+			'id_lab' => 'Nama Lab',
 		);
 	}
 

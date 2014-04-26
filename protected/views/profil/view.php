@@ -27,5 +27,6 @@ $this->breadcrumbs=array(
 		'ttl',
 		'alamat',
 		'telp',
+		'avatar',
 	),
 )); ?>

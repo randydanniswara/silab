@@ -10,6 +10,12 @@
  * @property string $ttl
  * @property string $alamat
  * @property string $telp
+ * @property string $avatar
+ *
+ * The followings are the available model relations:
+ * @property User $id0
+ * @property User[] $users
+ * @property User[] $users1
  */
 class Profil extends CActiveRecord
 {
@@ -29,16 +35,30 @@ class Profil extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id', 'required'),
+			array('id, nama_depan, nama_belakang', 'required'),
 			array('id', 'numerical', 'integerOnly'=>true),
-			array('nama_depan, nama_belakang', 'length', 'max'=>20),
+			array('nama_depan, nama_belakang, avatar', 'length', 'max'=>20),
+			array('ttl', 'length', 'max'=>32),
 			array('alamat', 'length', 'max'=>50),
 			array('telp', 'length', 'max'=>15),
-			array('ttl', 'safe'),
+			array('avatar','file','types'=>'jpg, gif, png', 'maxSize'=>1*1024*1024,'allowEmpty'=>true),
+			array('avatar', 'length', 'max'=>255, 'on'=>'insert,update'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, nama_depan, nama_belakang, ttl, alamat, telp', 'safe', 'on'=>'search'),
+			array('id, nama_depan, nama_belakang, ttl, alamat, telp, avatar', 'safe', 'on'=>'search'),
 		);
+	}
+
+public function getDetail() {
+		$x = array();
+		$x['id'] = $this->id;
+		$x['nama_depan'] = $this->nama_depan;
+		$x['nama_belakang'] = $this->nama_belakang;
+		$x['ttl'] = $this->ttl;
+		$x['alamat'] = $this->alamat;
+		$x['telp'] = $this->telp;
+		$x['avatar'] = $this->avatar;
+		return $x;
 	}
 
 	/**
@@ -49,6 +69,9 @@ class Profil extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'id0' => array(self::BELONGS_TO, 'User', 'id'),
+			'users' => array(self::MANY_MANY, 'User', 'Profil_Anggota(id_profil, id_user)'),
+			'users1' => array(self::MANY_MANY, 'User', 'Profil_Ketua(id_profil, id_user)'),
 		);
 	}
 
@@ -64,6 +87,7 @@ class Profil extends CActiveRecord
 			'ttl' => 'Ttl',
 			'alamat' => 'Alamat',
 			'telp' => 'Telp',
+			'avatar' => 'Foto Profil',
 		);
 	}
 
@@ -91,6 +115,7 @@ class Profil extends CActiveRecord
 		$criteria->compare('ttl',$this->ttl,true);
 		$criteria->compare('alamat',$this->alamat,true);
 		$criteria->compare('telp',$this->telp,true);
+		$criteria->compare('avatar',$this->avatar,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

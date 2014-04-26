@@ -9,10 +9,11 @@ $this->breadcrumbs=array(
 $this->menu=array(
 	array('label'=>'Create Kegiatan', 'url'=>array('create')),
 	array('label'=>'Manage Kegiatan', 'url'=>array('admin')),
+	array('label'=>'Download Kegiatan', 'url'=>array('pdf')),
 );
 ?>
 
-<h1>Kegiatans</h1>
+<h1>Kegiatans </h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

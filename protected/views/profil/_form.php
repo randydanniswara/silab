@@ -13,17 +13,15 @@
 	// There is a call to performAjaxValidation() commented in generated controller code.
 	// See class documentation of CActiveForm for details on this.
 	'enableAjaxValidation'=>false,
+	'htmlOptions'=> array(
+		'enctype'=>'multipart/form-data',
+	),
 )); ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'id'); ?>
-		<?php echo $form->textField($model,'id', array('value'=>Yii::app()->user->id,'disabled'=>true)); ?>
-		<?php echo $form->error($model,'id'); ?>
-	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'nama_depan'); ?>
@@ -39,7 +37,18 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'ttl'); ?>
-		<?php echo $form->textField($model,'ttl',array('size'=>32,'maxlength'=>32)); ?>
+		<?php
+			$this->widget('zii.widgets.jui.CJuiDatePicker',
+		     array(
+		          'name'=>'ttl',
+		          'attribute'=>'ttl', // Model attribute filed which hold user input
+		          'model'=>$model,            // Model name
+		          'value'=>date('Y-m-d'),
+		          'htmlOptions'=>array('size'=>32),
+		         )
+		    );
+		?>
+		<?php //echo $form->textField($model,'ttl',array('size'=>32,'maxlength'=>32)); ?>
 		<?php echo $form->error($model,'ttl'); ?>
 	</div>
 
@@ -54,6 +63,13 @@
 		<?php echo $form->textField($model,'telp',array('size'=>15,'maxlength'=>15)); ?>
 		<?php echo $form->error($model,'telp'); ?>
 	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'avatar'); ?>
+		<?php echo $form->fileField($model,'avatar'); ?>
+		<?php echo $form->error($model,'avatar'); ?>
+	</div>
+
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>

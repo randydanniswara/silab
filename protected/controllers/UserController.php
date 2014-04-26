@@ -28,8 +28,12 @@ class UserController extends Controller
 	{
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('index','view','admin','delete','create','update'),
-				'expression'=>'$user->getRole()<=2',
+				'actions'=>array('index','view'),
+				'users'=>array('@'),
+			),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('admin','delete','create','update'),
+				'expression'=>'$user->getRole()<=1',
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -59,20 +63,25 @@ class UserController extends Controller
 	public function actionCreate()
 	{
 		$model=new User;
-		$model->scenario = 'create';
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
 		if(isset($_POST['User']))
 		{	
-			// $sql = 'SELECT COUNT(*) FROM "User"'; 
-			// $count = Yii::app()->db->createCommand($sql)->queryScalar();
 			$model->attributes=$_POST['User'];
-			$model->password = $model->hashPassword($model->password);
-			// $model->id = $count+1;
-			//echo var_dump($model);
-			if($model->save())
+			if($model->save()) {
+				$labs = new LabUser;
+				$labs->id_lab = $_POST['LabUser']['id_lab'];
+				$labs->id_user = $model->id;
+				$r = Yii::app()->user->getRole();
+				if ($r == 2){
+					$blah = Lab::model()->findByPk($labs->id_lab);
+					$blah->id_ketua = $model->id;
+					$blah->update();
+				}
+				$labs->save();
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('create',array(
@@ -89,13 +98,19 @@ class UserController extends Controller
 	{
 		$model=$this->loadModel($id);
 		$model->password = '';
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		$model->samePassword = '';
 
 		if(isset($_POST['User']))
 		{
 			$model->attributes=$_POST['User'];
+			//echo var_dump($_POST);return;
+			$r = $model->role;
+			if ($r == 2){
+				$blah = Lab::model()->findByPk($_POST['LabUser']['id_lab']);
+				$blah->id_ketua = $model->id;
+				//echo var_dump($blah);return;
+				$blah->update();
+			}
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}

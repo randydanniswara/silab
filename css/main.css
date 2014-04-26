@@ -1,9 +1,23 @@
+@font-face {
+	font-family : 'Droid Sans';
+	src : url('../assets/font/DroidSans.ttf');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family : 'Droid Sans';
+	src : url('../assets/font/DroidSans-Bold.ttf');
+	font-weight: bold;
+	font-style: normal;
+}
+
 body
 {
 	margin: 0;
 	padding: 0;
 	color: #555;
-	font: normal 10pt Arial,Helvetica,sans-serif;
+	font: normal 10pt 'Droid Sans',Arial,Helvetica,sans-serif;
 	background: #EFEFEF;
 }
 
@@ -67,7 +81,7 @@ body
 {
 	color:#ffffff;
 	background-color:transparent;
-	font-size:12px;
+	font-size:1em;
 	font-weight:bold;
 	text-decoration:none;
 	padding:5px 8px;
@@ -132,7 +146,7 @@ div.view
 {
 	padding: 10px;
 	margin: 10px 0;
-	border: 1px solid #C9E0ED;
+	border: 1px solid lightblue;
 }
 
 div.breadcrumbs
@@ -167,7 +181,7 @@ div.search-form
 
 .portlet-title
 {
-	font-size: 12px;
+	font-size: 1em;
 	font-weight: bold;
 	padding: 0;
 	margin: 0;
@@ -210,7 +224,7 @@ div.search-form
 
 .operations li a
 {
-	font: bold 12px Arial;
+	font: bold 1em Arial;
 	color: #0066A4;
 	display: block;
 	padding: 2px 0 2px 8px;

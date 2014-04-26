@@ -20,15 +20,26 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'id'); ?>
-		<?php echo $form->textField($model,'id'); ?>
-		<?php echo $form->error($model,'id'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'nama'); ?>
 		<?php echo $form->textField($model,'nama',array('size'=>50,'maxlength'=>50)); ?>
 		<?php echo $form->error($model,'nama'); ?>
+	</div>
+	
+	<div class="row">
+		<?php echo $form->labelEx($model,'Tanggal Kegiatan'); ?>
+		<?php
+			$this->widget('zii.widgets.jui.CJuiDatePicker',
+		     array(
+		          'name'=>'Tanggal Kegiatan',
+		          'attribute'=>'waktu_kegiatan', // Model attribute filed which hold user input
+		          'model'=>$model,            // Model name
+		          'value'=>date('Y-m-d'),
+		          'htmlOptions'=>array('size'=>32),
+		         )
+		    );
+		?>
+
+		<?php echo $form->error($model,'waktu_kegiatan'); ?>
 	</div>
 
 	<div class="row">
@@ -37,17 +48,7 @@
 		<?php echo $form->error($model,'deskripsi'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'waktu'); ?>
-		<?php echo $form->textField($model,'waktu',array('size'=>30,'maxlength'=>30)); ?>
-		<?php echo $form->error($model,'waktu'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'id_lab'); ?>
-		<?php echo $form->textField($model,'id_lab'); ?>
-		<?php echo $form->error($model,'id_lab'); ?>
-	</div>
+	
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>

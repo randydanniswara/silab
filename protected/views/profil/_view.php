@@ -28,6 +28,10 @@
 	<b><?php echo CHtml::encode($data->getAttributeLabel('telp')); ?>:</b>
 	<?php echo CHtml::encode($data->telp); ?>
 	<br />
+	
+	<b><?php echo CHtml::encode($data->getAttributeLabel('avatar')); ?>:</b>
+	<?php echo CHtml::encode($data->avatar); ?>
+
 
 
 </div>

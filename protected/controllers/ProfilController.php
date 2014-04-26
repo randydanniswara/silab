@@ -68,12 +68,22 @@ class ProfilController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
+		$URL_AVATAR = '/../assets/avatar/';
 		if(isset($_POST['Profil']))
 		{
 			$model->attributes=$_POST['Profil'];
-			if($model->save())
+			//echo var_dump($model);return;
+			$model->id = Yii::app()->user->id;	
+	        $model->avatar = CUploadedFile::getInstance($model, 'avatar');
+	        // echo var_dump($model);return;
+			if($model->validate()){
+	           $model->avatar->saveAs(Yii::app()->basePath .$URL_AVATAR.$model->avatar->getName());
+	           Yii::app()->user->setFlash('upload','File '.$model->avatar->getName().' telah terupload.');      
+		    }
+			if($model->save()) {
 				$this->redirect(array('view','id'=>$model->id));
+
+			}
 		}
 
 		$this->render('create',array(
@@ -88,6 +98,7 @@ class ProfilController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
+		$URL_AVATAR = '/../assets/avatar/';
 		$model=$this->loadModel($id);
 
 		// Uncomment the following line if AJAX validation is needed
@@ -98,8 +109,22 @@ class ProfilController extends Controller
 		if(isset($_POST['Profil']))
 		{
 			$model->attributes=$_POST['Profil'];
-			if($model->save())
+			if($model->validate()){
+			   $profil = Profil::model()->find("id=".Yii::app()->user->id);
+			   $link = Yii::app()->basePath.$URL_AVATAR.$profil->avatar;
+			   if (file_exists($link) and is_dir($link)) {
+    				unlink($link);         
+			   } 
+	           $model->avatar = CUploadedFile::getInstance($model, 'avatar');
+	           //echo "asd".var_dump($model);return;
+	           $model->avatar->saveAs(Yii::app()->basePath .$URL_AVATAR.$model->avatar->getName());
+	           // echo var_dump($model);return;
+	           Yii::app()->user->setFlash('upload','File '.$model->avatar->getName().' telah terupload.');      
+		    }
+			if($model->save()) {
 				$this->redirect(array('view','id'=>$model->id));
+
+			}
 		}
 
 		$this->render('update',array(
@@ -126,10 +151,12 @@ class ProfilController extends Controller
 	 */
 	public function actionIndex()
 	{
+		$lab = Lab::model()->with('users')->findAll('users.id=:id',array(":id"=>Yii::app()->user->id));
 		$dataProvider= Profil::model()->findByPk((int)Yii::app()->user->id);
 		if ($dataProvider == NULL) $this->redirect(array('create','id'=>(int)Yii::app()->user->id));
 		$this->render('index',array(
 			'model'=>$dataProvider,
+			'lab'=>$lab,
 		));
 	}
 

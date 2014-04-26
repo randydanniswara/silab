@@ -32,12 +32,8 @@ class KegiatanController extends Controller
 				'users'=>array('*'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'actions'=>array('create','update','admin','delete','pdf'),
+				'expression'=>'$user->getRole()==2',
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -66,18 +62,27 @@ class KegiatanController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
+		$id_ketua = Yii::app()->user->id;	
+		$lab = Lab::model()->find("id_ketua=:x",array("x"=>$id_ketua));
 
 		if(isset($_POST['Kegiatan']))
 		{
 			$model->attributes=$_POST['Kegiatan'];
-			if($model->save())
+			$model->waktu = date('Y-m-d h:i:s');
+			$model->id_lab = $lab->id;
+			//echo var_dump($model->attributes);return;
+			if($model->save()) {
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
+			'lab'=>$lab,
 		));
 	}
+
+	
 
 	/**
 	 * Updates a particular model.
@@ -170,4 +175,55 @@ class KegiatanController extends Controller
 			Yii::app()->end();
 		}
 	}
+
+	public function actionPdf(){
+		$id_ketua = Yii::app()->user->id;
+ 		$lab = Lab::model()->find("id_ketua=:x",array("x"=>$id_ketua));
+        $pdf = new ToPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+        spl_autoload_register(array('YiiBase','autoload'));
+        $pdf->SetCreator(PDF_CREATOR);  
+ 		$pdf->SetAuthor('Propensi B05');
+        $pdf->SetTitle("List Kegiatan Lab ".$lab->nama);                
+        $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH, "List Kegiatan Lab ".$lab->nama);
+        $pdf->SetPrintHeader(false);
+        $pdf->SetPrintFooter(false);
+        $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+        $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+        $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+        $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
+        $pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
+        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+        $pdf->SetFont('helvetica', '', 8);
+        $pdf->SetTextColor(80,80,80);
+        $pdf->AddPage();
+ 		$html = "                                            ";
+        $html .= "<h1 style='margin-bottom:100px;'>List Kegiatan Lab&nbsp;".$lab->nama."</h1><br>";
+        $pdf->writeHTML($html, true, false, true, false, 'C');
+        $header = array('ID', 'Judul', 'Waktu', 'Nama Lab', 'Isi Dokumen'); //TODO:you can change this Header information according to your need.Also create a Dynamic Header.
+ 
+
+        // data loading
+        $data = $pdf->LoadData(Yii::getPathOfAlias('ext.tcpdf').DIRECTORY_SEPARATOR.'examples\data\table_data_demo.txt'); //This is the example to load a data from text file. You can change here code to generate a Data Set from your model active Records. Any how we need a Data set Array here.
+        // print colored table
+        $p = Kegiatan::model()->findAll();
+        $a = array();
+        $tmp = "";
+        foreach ($p as $key) {
+        	
+        	$tmp .= "<h3>$key->id.".$key->nama."</h3><br>";
+        	$tmp .= "<span><h5><i>$key->waktu</i></h5></span><br>";
+        	$tmp .= "<div>".$key->deskripsi."</div><br><hr>";
+        	//$key->id,$key->nama,$key->waktu,$lab->nama,$key->isi	
+        }
+
+        $pdf->writeHTML($tmp,true,false,true,false,'L');
+
+        //$pdf->ColoredTable($header, $a);
+        $pdf->lastPage();
+ 
+        //Close and output PDF document
+        $pdf->Output('Dokumen-'.$lab->nama.'.pdf', 'I');
+        Yii::app()->end();
+ 
+    }
 }

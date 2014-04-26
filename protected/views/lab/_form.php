@@ -20,12 +20,6 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'id'); ?>
-		<?php echo $form->textField($model,'id'); ?>
-		<?php echo $form->error($model,'id'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'nama'); ?>
 		<?php echo $form->textField($model,'nama',array('size'=>50,'maxlength'=>50)); ?>
 		<?php echo $form->error($model,'nama'); ?>
@@ -35,6 +29,12 @@
 		<?php echo $form->labelEx($model,'profil'); ?>
 		<?php echo $form->textArea($model,'profil',array('rows'=>6, 'cols'=>50)); ?>
 		<?php echo $form->error($model,'profil'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'ketua Lab'); ?>
+		<?php echo $form->dropDownList($model,'id_ketua',$list, array('empty'=>'Pilih ketua Lab Anda!')); ?>
+		<?php echo $form->error($model,'id_ketua'); ?>
 	</div>
 
 	<div class="row buttons">
