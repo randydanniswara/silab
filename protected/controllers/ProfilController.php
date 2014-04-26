@@ -151,7 +151,9 @@ class ProfilController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$lab = Lab::model()->with('users')->findAll('users.id=:id',array(":id"=>Yii::app()->user->id));
+		//'users.id=:id',array(":id"=>Yii::app()->user->id)
+		$lab = Lab::model()->with('users')->findAll('users.id='.Yii::app()->user->id);
+		echo var_dump($lab);return;
 		$dataProvider= Profil::model()->findByPk((int)Yii::app()->user->id);
 		if ($dataProvider == NULL) $this->redirect(array('create','id'=>(int)Yii::app()->user->id));
 		$this->render('index',array(

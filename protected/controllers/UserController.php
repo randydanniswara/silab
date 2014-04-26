@@ -105,6 +105,12 @@ class UserController extends Controller
 			$model->attributes=$_POST['User'];
 			//echo var_dump($_POST);return;
 			$r = $model->role;
+			$labs = LabUser::model()->find("id_user=".$id);
+			//echo var_dump($labs);return;
+			//echo $_POST['LabUser']['id_lab'];return;
+			$labs->id_lab = $_POST['LabUser']['id_lab'];
+			$labs->id_user = $model->id;
+			//echo var_dump($model);return;
 			if ($r == 2){
 				$blah = Lab::model()->findByPk($_POST['LabUser']['id_lab']);
 				$blah->id_ketua = $model->id;
