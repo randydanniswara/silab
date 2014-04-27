@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.2.4
 -- Dumped by pg_dump version 9.2.4
--- Started on 2014-04-27 20:33:30
+-- Started on 2014-04-27 22:17:47
 
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
@@ -571,6 +571,7 @@ COPY "Anggota" (id) FROM stdin;
 
 COPY "Aset" (nama, jumlah, tahun, id_lab, id) FROM stdin;
 Laptop	99	2011	4	8
+Bitcoin	500	1998	12	10
 \.
 
 
@@ -580,7 +581,7 @@ Laptop	99	2011	4	8
 -- Name: Aset_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('"Aset_id_seq"', 9, true);
+SELECT pg_catalog.setval('"Aset_id_seq"', 10, true);
 
 
 --
@@ -665,10 +666,10 @@ COPY "Lab_User" (id_user, id_lab) FROM stdin;
 16	12
 2	5
 17	4
-3	8
 8	5
 9	5
 14	12
+3	4
 \.
 
 
@@ -753,6 +754,7 @@ COPY "Publikasi" (id, tahun, pengarang, judul, id_lab) FROM stdin;
 2	2014	Hahayde	Jenis Jenis Serangan.doc	12
 3	1946	Kevin Mittnick	PengembanganPermainan-SeleksiProposalTahap.pdf	5
 9	1997	Parampa	license.txt	4
+11	2001	Mas Tukul ojo dumeh	license.txt	4
 \.
 
 
@@ -776,6 +778,7 @@ COPY "Publikasi_User" (id_publikasi, id_user) FROM stdin;
 9	7
 2	17
 3	6
+11	3
 \.
 
 
@@ -793,9 +796,9 @@ kampret                         	4d2b31c91d33a32a98584546736d5c73	popok@popok.co
 ketua                           	4d2b31c91d33a32a98584546736d5c73	blabla@gmail.com                	2	2
 Matek                           	4d2b31c91d33a32a98584546736d5c73	zaka@zaka.com                   	16	2
 Hana                            	4d2b31c91d33a32a98584546736d5c73	hana@hana.com                   	15	2
+user                            	4d2b31c91d33a32a98584546736d5c73	zaka.smansa@gmail.com           	3	3
 userbaru                        	4d2b31c91d33a32a98584546736d5c73	userbaru@gmail.com              	7	1
 aaa                             	4d2b31c91d33a32a98584546736d5c73	aaa                             	8	3
-user                            	4d2b31c91d33a32a98584546736d5c73	zaka.smansa@gmail.com           	3	3
 randy                           	4d2b31c91d33a32a98584546736d5c73	randy@r.com                     	14	3
 \.
 
@@ -860,7 +863,7 @@ SELECT pg_catalog.setval('pesan', 1, false);
 -- Name: publikasi; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('publikasi', 10, true);
+SELECT pg_catalog.setval('publikasi', 12, true);
 
 
 --
@@ -1343,7 +1346,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2014-04-27 20:33:31
+-- Completed on 2014-04-27 22:17:48
 
 --
 -- PostgreSQL database dump complete
