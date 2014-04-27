@@ -33,7 +33,11 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'tahun'); ?>
-		<?php echo $form->textField($model,'tahun'); ?>
+		<select name="Aset[tahun]" id="Aset_tahun">
+			<?php for ($i = intval(date('Y'));$i>=1980;--$i) {?>
+				<option value="<?php echo $i;?>"><?php echo $i;?></option>
+			<?php } ?>
+		</select>
 		<?php echo $form->error($model,'tahun'); ?>
 	</div>
 

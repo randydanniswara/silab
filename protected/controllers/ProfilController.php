@@ -52,7 +52,7 @@ class ProfilController extends Controller
 	 */
 	public function actionView($id)
 	{
-		if ($id != Yii::app()->user->id) $this->redirect(array('profil/index'));
+		//if ($id != Yii::app()->user->id) $this->redirect(array('profil/index'));
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
@@ -99,6 +99,7 @@ class ProfilController extends Controller
 	 */
 	public function actionUpdate($id)
 	{
+		if ($id != Yii::app()->user->id || Yii::app()->user->getRole() == 3) $this->redirect(array('profil/index'));
 		$URL_AVATAR = '/../assets/avatar/';
 		$model=$this->loadModel($id);
 
@@ -110,20 +111,17 @@ class ProfilController extends Controller
 		if(isset($_POST['Profil']))
 		{
 			$model->attributes=$_POST['Profil'];
+			// $prof
 			//echo var_dump($_POST);return;
 			if($model->validate()){
 			   $profil = Profil::model()->find("id=".Yii::app()->user->id);
 			   $link = Yii::app()->basePath.$URL_AVATAR.$profil->avatar;
 			   
 			   if (file_exists($link) and is_dir($link) and strlen($profil->avatar)!=0) {
-    				echo "ada ".$link;
     				unlink($link);         
 			   } 
 	           $model->avatar = CUploadedFile::getInstance($model, 'avatar');
-	           //echo "asd".var_dump($model->avatar->getExtensionName());return;
 	           $model->avatar->saveAs(Yii::app()->basePath .$URL_AVATAR."Profil_".$model->id.".".$model->avatar->getExtensionName());
-	          // echo Yii::app()->basePath .$URL_AVATAR.$model->nama_depan."_".$model->nama_belakang;return;
-	           //echo var_dump($model);return;
 	           Yii::app()->user->setFlash('upload','File '.$model->avatar->getName().' telah terupload.');      
    	           $model->avatar = "Profil_".$model->id.".".$model->avatar->getExtensionName();
 		    }

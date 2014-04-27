@@ -27,6 +27,10 @@ $this->breadcrumbs=array(
 		'ttl',
 		'alamat',
 		'telp',
-		'avatar',
+		array(
+			'label'=>'Foto Profil',
+			'type' => 'image',
+			'value' => '../../assets/avatar/'.$model->avatar,
+		),
 	),
 )); ?>

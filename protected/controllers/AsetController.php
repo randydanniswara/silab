@@ -28,7 +28,11 @@ class AsetController extends Controller
 	{
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('index','view','admin','delete','create','update'),
+				'actions'=>array('index','view'),
+				'expression'=>'$user->getRole()<=3',
+			),
+			array ('allow',
+				'actions'=>array('admin','delete','create','update'),
 				'expression'=>'$user->getRole()<=2',
 			),
 			array('deny',  // deny all users
@@ -59,9 +63,10 @@ class AsetController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-		$id_ketua = Yii::app()->user->id;	
+		$id_ketua = Yii::app()->user->id;
+		if (Yii::app()->user->getRole() == 1)
+			throw new CHttpException(403,'Sorry, this page is only for the Head of Laboratory');	
 		$lab = Lab::model()->find("id_ketua=:x",array("x"=>$id_ketua));
-		
 		if(isset($_POST['Aset']))
 		{
 			$model->attributes=$_POST['Aset'];
@@ -123,7 +128,7 @@ class AsetController extends Controller
 	 */
 	public function actionIndex()
 	{
-		if (Yii::app()->user->getRole()>2) $this->redirect(array("/site/index"));
+		if (Yii::app()->user->getRole() == 1) $this->redirect(array("/site/index"));
 		$dataProvider=new CActiveDataProvider('Aset');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,

@@ -6,15 +6,14 @@ $this->breadcrumbs=array(
 	'Publikasis',
 );
 
-$this->menu=array(
-	array('label'=>'Create Publikasi', 'url'=>array('create')),
-	array('label'=>'Manage Publikasi', 'url'=>array('admin')),
-);
 ?>
 
 <h1>Publikasis</h1>
-
+<br>
+<?php echo CHtml::link('(+) Create File',array('publikasi/create'),array('class'=>'button'));  ?>
+<br>
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
+	'summaryText'=>'',
 	'itemView'=>'_view',
 )); ?>

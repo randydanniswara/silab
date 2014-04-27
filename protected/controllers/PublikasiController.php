@@ -7,6 +7,7 @@ class PublikasiController extends Controller
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';
+	public $pub = array();
 
 	/**
 	 * @return array action filters
@@ -80,8 +81,13 @@ class PublikasiController extends Controller
 			$model->judul->saveAs($URL.$model->judul);
 			$model->judul = $model->judul->getName();
 			//echo var_dump($model);return;
-			if($model->save())
+			if($model->save()) {
+				$pub_user = new PublikasiUser;
+				$pub_user->id_publikasi = intval($model->id);
+				$pub_user->id_user = Yii::app()->user->id;
+				$pub_user->save();
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('create',array(
@@ -101,6 +107,9 @@ class PublikasiController extends Controller
 		$lab = Lab::model()->find("id=:p",array("p"=>$model->id_lab));
 		$URL = Yii::app()->basePath .'/../assets/publikasi/'.$lab->id."/";
 		$delete = $URL.$model->judul;
+		$pub_user = PublikasiUser::model()->findByAttributes(array('id_user'=>Yii::app()->user->id,'id_publikasi'=>$id));
+		if ($pub_user == NULL)
+			throw new CHttpException('403','You cannot update this publication');
 		//echo $delete;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -111,6 +120,9 @@ class PublikasiController extends Controller
 			$model->validate();
 			$model->judul->saveAs($URL.$model->judul);
 			$model->judul = $model->judul->getName();
+			$pub_user->id_publikasi = $model->id;
+			$pub_user->id_user = Yii::app()->user->id;
+			$pub_user->save();
 			unlink($delete);
 			//echo var_dump($model);return;
 			if($model->save()) {
@@ -132,12 +144,14 @@ class PublikasiController extends Controller
 	public function actionDelete($id)
 	{
 		$model = $this->loadModel($id);
-		$link  = Yii::app()->basePath.$URL_AVATAR.$model->judul;
+		$URL = Yii::app()->basePath .'/../assets/publikasi/'.$model->id_lab."/";
+		$link  = $URL.$model->judul;
+		$relasi = PublikasiUser::model()->find("id_publikasi=".$id);
 	 	unlink($link);
 	 	$model->delete();
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+			$this->redirect(array('index'));
 	}
 
 	/**
@@ -146,6 +160,14 @@ class PublikasiController extends Controller
 	public function actionIndex()
 	{
 		$dataProvider=new CActiveDataProvider('Publikasi');
+		$list = PublikasiUser::model()->findAll("id_user=".Yii::app()->user->id);
+		if (empty($list)) {
+			$this->redirect(array('create'));
+		}
+		$tmp = array();
+		foreach ($list as $k) {
+			$this->pub[] = $k->id_publikasi;
+		}
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
