@@ -7,6 +7,7 @@ class LabController extends Controller
 	 * using two-column layout. See 'protected/views/layouts/column2.php'.
 	 */
 	public $layout='//layouts/column2';
+	public $listAnggota = NULL;
 
 	/**
 	 * @return array action filters
@@ -127,10 +128,10 @@ class LabController extends Controller
 	public function actionIndex()
 	{
 		$dataProvider=new CActiveDataProvider('Lab');
-		$list = Lab::model()->getAllAnggota();
+		$this->listAnggota = Lab::model()->getAllAnggota();
+		//echo var_dump($dataProvider);return;
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
-			'list'=>$list,
 		));
 	}
 

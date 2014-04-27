@@ -19,4 +19,4 @@ $this->menu=array(
 	'itemView'=>'_view',
 )); ?>
 
-	<?php echo var_dump($list);?>
+	

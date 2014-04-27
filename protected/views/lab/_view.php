@@ -21,4 +21,18 @@
 	<?php echo CHtml::encode($data->id_ketua); ?>
 	<br />
 
+	<b> Daftar Anggota Lab:</b><br>
+	<ul>
+	<?php $list = $this->listAnggota;
+		foreach ($list as $k => $v) {
+			if ($k == $data->id){
+				foreach ($v as $nama) {
+					echo "<li>$nama</li>";
+				}
+			}
+		}
+
+	?>
+	</ul>
+
 </div>
