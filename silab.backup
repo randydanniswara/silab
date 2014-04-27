@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.2.4
 -- Dumped by pg_dump version 9.2.4
--- Started on 2014-04-27 12:24:06
+-- Started on 2014-04-27 15:37:47
 
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
@@ -458,26 +458,13 @@ ALTER TABLE public.publikasi OWNER TO postgres;
 CREATE TABLE "Publikasi" (
     id integer DEFAULT nextval('publikasi'::regclass) NOT NULL,
     tahun integer NOT NULL,
-    pengarang character varying(50) NOT NULL,
-    judul character varying(50) NOT NULL,
+    pengarang character varying(100) NOT NULL,
+    judul character varying(100) NOT NULL,
     id_lab integer
 );
 
 
 ALTER TABLE public."Publikasi" OWNER TO postgres;
-
---
--- TOC entry 187 (class 1259 OID 16677)
--- Name: Publikasi_Anggota; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
---
-
-CREATE TABLE "Publikasi_Anggota" (
-    id_publikasi integer NOT NULL,
-    id_user integer NOT NULL
-);
-
-
-ALTER TABLE public."Publikasi_Anggota" OWNER TO postgres;
 
 --
 -- TOC entry 186 (class 1259 OID 16661)
@@ -491,6 +478,19 @@ CREATE TABLE "Publikasi_Ketua" (
 
 
 ALTER TABLE public."Publikasi_Ketua" OWNER TO postgres;
+
+--
+-- TOC entry 187 (class 1259 OID 16677)
+-- Name: Publikasi_User; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Publikasi_User" (
+    id_publikasi integer NOT NULL,
+    id_user integer NOT NULL
+);
+
+
+ALTER TABLE public."Publikasi_User" OWNER TO postgres;
 
 --
 -- TOC entry 198 (class 1259 OID 16763)
@@ -750,16 +750,9 @@ COPY "Profil_Ketua" (id_user, id_profil) FROM stdin;
 --
 
 COPY "Publikasi" (id, tahun, pengarang, judul, id_lab) FROM stdin;
-\.
-
-
---
--- TOC entry 2125 (class 0 OID 16677)
--- Dependencies: 187
--- Data for Name: Publikasi_Anggota; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY "Publikasi_Anggota" (id_publikasi, id_user) FROM stdin;
+2	2014	Hahayde	Jenis Jenis Serangan.doc	12
+1	2014	Nyoba aja gan	latihan-jarkom-opensource.pdf	12
+3	1946	Kevin Mittnick	PengembanganPermainan-SeleksiProposalTahap.pdf	5
 \.
 
 
@@ -770,6 +763,16 @@ COPY "Publikasi_Anggota" (id_publikasi, id_user) FROM stdin;
 --
 
 COPY "Publikasi_Ketua" (id_publikasi, id_user) FROM stdin;
+\.
+
+
+--
+-- TOC entry 2125 (class 0 OID 16677)
+-- Dependencies: 187
+-- Data for Name: Publikasi_User; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY "Publikasi_User" (id_publikasi, id_user) FROM stdin;
 \.
 
 
@@ -854,7 +857,7 @@ SELECT pg_catalog.setval('pesan', 1, false);
 -- Name: publikasi; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('publikasi', 1, false);
+SELECT pg_catalog.setval('publikasi', 3, true);
 
 
 --
@@ -1042,7 +1045,7 @@ ALTER TABLE ONLY "Profil"
 -- Name: Publikasi_Anggota_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
 --
 
-ALTER TABLE ONLY "Publikasi_Anggota"
+ALTER TABLE ONLY "Publikasi_User"
     ADD CONSTRAINT "Publikasi_Anggota_pkey" PRIMARY KEY (id_publikasi, id_user);
 
 
@@ -1123,7 +1126,7 @@ ALTER TABLE ONLY "Ketua"
 -- Name: Publikasi_Anggota_id_user_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY "Publikasi_Anggota"
+ALTER TABLE ONLY "Publikasi_User"
     ADD CONSTRAINT "Publikasi_Anggota_id_user_fkey" FOREIGN KEY (id_user) REFERENCES "User"(id) ON UPDATE RESTRICT ON DELETE CASCADE;
 
 
@@ -1159,7 +1162,7 @@ ALTER TABLE ONLY "Aset"
 -- Name: blahblah; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY "Publikasi_Anggota"
+ALTER TABLE ONLY "Publikasi_User"
     ADD CONSTRAINT blahblah FOREIGN KEY (id_publikasi) REFERENCES "Publikasi"(id) ON UPDATE RESTRICT ON DELETE CASCADE;
 
 
@@ -1337,7 +1340,7 @@ GRANT ALL ON SCHEMA public TO postgres;
 GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
--- Completed on 2014-04-27 12:24:08
+-- Completed on 2014-04-27 15:37:48
 
 --
 -- PostgreSQL database dump complete
