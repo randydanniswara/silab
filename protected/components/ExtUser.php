@@ -15,21 +15,18 @@
 	    }
 
 	    function isAdmin($id){
-	    	$kelas = Admin::model()->findByPk($id);
-	    	if ($kelas === null) return false;
-	    	return true;
+	    	if ($id == 1) return true;
+	    	return false;
 	    }
 
 	    function isKetua($id){
-	    	$kelas = Ketua::model()->findByPk($id);
-	    	if ($kelas === null) return false;
-	    	return true;
+	    	if ($id == 2) return true;
+	    	return false;
 	    }
 
-	    function isAnggota(){
-	    	$kelas = Anggota::model()->findByPk($id);
-	    	if ($kelas === null) return false;
-	    	return true;
+	    function isAnggota($id){
+	    	if ($id == 3) return true;
+	    	return false;
 	    }
 	}
 ?>

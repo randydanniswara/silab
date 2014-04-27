@@ -126,20 +126,32 @@ class Lab extends CActiveRecord
 		return $command->query();
 	}
 
-	public function genList() {
-		$x = User::model()->findAll('role=:p',array('p'=>'2'));
-		$list = array();
-		 foreach ($x as $key) {
-		 	$m = $key->profil->getDetail();
-		 	$tmp = ""; $po=0;
-		 	foreach ($m as $k => $v) {
-		 		if ($k == "id") $po = $v;  
-		 		if ($k =="nama_depan" || $k == "nama_belakang")	
-		 			$tmp= $tmp." ".$v;
-		 	}
-		 	$list[$po] = $tmp;
+	public function getAllAnggota() {
+		$tmp = array();
+		$lab = self::model()->findAll();
+		foreach ($lab as $key) {
+			$x = $key->id;
+			//echo $x." ";
+			$an = LabUser::model()->findAll('id_lab='.$x);
+			//echo "<br>Untuk Lab ".$key->nama."<br>";
+			$kumpulanAnggota = array();
+			foreach ($an as $key) {
+				foreach ($key as $m=>$v) {
+					if ($m == 'id_user') {
+						//echo $v."<br>";
+						$po = Profil::model()->find("id=".$v);
+						$g = $po->getDetail();
+						$nama_lengkap = $g['nama_depan']." ".$g['nama_belakang']; 
+						//echo $nama_lengkap."<br>";
+						$kumpulanAnggota[] = $nama_lengkap;
+					}
+				}
+				//echo var_dump($kumpulanAnggota);
+				$tmp[$x] = $kumpulanAnggota;
+				
+			}
 		}
+		return $tmp;
+	} 
 
-		return $list;
-	}
 }

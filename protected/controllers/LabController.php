@@ -53,6 +53,7 @@ class LabController extends Controller
 	{
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
+			'list'=>Lab::model()->getAnggota($id),
 		));
 	}
 
@@ -77,7 +78,6 @@ class LabController extends Controller
 
 		$this->render('create',array(
 			'model'=>$model,
-			'list'=>Lab::model()->genList(),
 		));
 	}
 
@@ -127,7 +127,7 @@ class LabController extends Controller
 	public function actionIndex()
 	{
 		$dataProvider=new CActiveDataProvider('Lab');
-		$list = Lab::model()->genList();
+		$list = Lab::model()->getAllAnggota();
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 			'list'=>$list,

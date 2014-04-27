@@ -1,0 +1,9 @@
+Packet Switching and Circuit switching
+packet sesuai dengan kebutuhan pengguna
+circuit sudah ditentukan batasannya
+
+bottleneck
+
+TCP dan UDP --> kenapa masi pakai UDP?
+UDP koneksi less, untuk cost yg lbh irit
+TCP lebih bagus tapi cost lbh bagus

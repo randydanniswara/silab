@@ -5,17 +5,25 @@
 
 <div class="view">
 
+<table>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('username')); ?>:</b>
-	<?php echo CHtml::encode($data->username); ?>
-	<br />
+<tr>
+	<td style="width:70px;"><b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?></b></td>
+	<td>:&nbsp;&nbsp;<?php echo CHtml::encode($data->id); ?></td>
+</tr>
+<tr>
+	<td style="width:70px;"><b><?php echo CHtml::encode($data->getAttributeLabel('username')); ?></b></td>
+	<td>:&nbsp;&nbsp;<?php echo CHtml::encode($data->username); ?></td>
+</tr>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('email')); ?>:</b>
-	<?php echo CHtml::encode($data->email); ?>
-	<br />
+<tr>
+	<td><b><?php echo CHtml::encode($data->getAttributeLabel('email')); ?></b></td>
+	<td>:&nbsp;&nbsp;<?php echo CHtml::encode($data->email); ?></td>
+</tr>
 
-	<b><?php /*echo CHtml::encode($data->getAttributeLabel('role'));*/ echo $data->getAttributeLabel('role'); ?>:</b>
-	<?php 
+<tr>
+	<td><b><?php echo $data->getAttributeLabel('role'); ?></b></td>
+	<td>:&nbsp;&nbsp;<?php 
 		$role = "Anggota";
 		$x = intval($data->role);
 		if ($x == 1) {
@@ -27,7 +35,10 @@
 
 		echo CHtml::encode($data->role); 
 	?>
-	<br />
+	</td>
+</tr>
+</table>
 
+<?php echo CHtml::link('Update User',array('user/update','id'=>$data->id),array('class'=>'button'));  ?>
 
 </div>

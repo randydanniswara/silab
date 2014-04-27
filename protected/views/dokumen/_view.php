@@ -23,7 +23,8 @@
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('isi')); ?>:</b>
 	<?php echo CHtml::encode($data->isi); ?>
-	<br />
+	<br /><br/>
 
-
+	<a class="button" href="/propensi/assets/dokumen/<?php echo $data->id_lab."/".$data->isi;?>">Download Dokumen</a>
+	<?php echo CHtml::link('Update Dokumen',array('dokumen/update','id'=>$data->id),array('class'=>'button'));  ?>
 </div>

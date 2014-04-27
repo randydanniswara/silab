@@ -77,8 +77,9 @@ class ProfilController extends Controller
 	        $model->avatar = CUploadedFile::getInstance($model, 'avatar');
 	        // echo var_dump($model);return;
 			if($model->validate()){
-	           $model->avatar->saveAs(Yii::app()->basePath .$URL_AVATAR.$model->avatar->getName());
-	           Yii::app()->user->setFlash('upload','File '.$model->avatar->getName().' telah terupload.');      
+	           $model->avatar->saveAs(Yii::app()->basePath .$URL_AVATAR."Profil_".$model->id.".".$model->avatar->getExtensionName());
+	           Yii::app()->user->setFlash('upload','File '.$model->avatar->getName().' telah terupload.');  
+	           $model->avatar = "Profil_".$model->id.".".$model->avatar->getExtensionName();    
 		    }
 			if($model->save()) {
 				$this->redirect(array('view','id'=>$model->id));
@@ -109,17 +110,22 @@ class ProfilController extends Controller
 		if(isset($_POST['Profil']))
 		{
 			$model->attributes=$_POST['Profil'];
+			//echo var_dump($_POST);return;
 			if($model->validate()){
 			   $profil = Profil::model()->find("id=".Yii::app()->user->id);
 			   $link = Yii::app()->basePath.$URL_AVATAR.$profil->avatar;
-			   if (file_exists($link) and is_dir($link)) {
+			   
+			   if (file_exists($link) and is_dir($link) and strlen($profil->avatar)!=0) {
+    				echo "ada ".$link;
     				unlink($link);         
 			   } 
 	           $model->avatar = CUploadedFile::getInstance($model, 'avatar');
-	           //echo "asd".var_dump($model);return;
-	           $model->avatar->saveAs(Yii::app()->basePath .$URL_AVATAR.$model->avatar->getName());
-	           // echo var_dump($model);return;
+	           //echo "asd".var_dump($model->avatar->getExtensionName());return;
+	           $model->avatar->saveAs(Yii::app()->basePath .$URL_AVATAR."Profil_".$model->id.".".$model->avatar->getExtensionName());
+	          // echo Yii::app()->basePath .$URL_AVATAR.$model->nama_depan."_".$model->nama_belakang;return;
+	           //echo var_dump($model);return;
 	           Yii::app()->user->setFlash('upload','File '.$model->avatar->getName().' telah terupload.');      
+   	           $model->avatar = "Profil_".$model->id.".".$model->avatar->getExtensionName();
 		    }
 			if($model->save()) {
 				$this->redirect(array('view','id'=>$model->id));
@@ -153,7 +159,7 @@ class ProfilController extends Controller
 	{
 		//'users.id=:id',array(":id"=>Yii::app()->user->id)
 		$lab = Lab::model()->with('users')->findAll('users.id='.Yii::app()->user->id);
-		echo var_dump($lab);return;
+		//echo var_dump($lab);return;
 		$dataProvider= Profil::model()->findByPk((int)Yii::app()->user->id);
 		if ($dataProvider == NULL) $this->redirect(array('create','id'=>(int)Yii::app()->user->id));
 		$this->render('index',array(

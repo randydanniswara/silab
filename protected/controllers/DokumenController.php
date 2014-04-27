@@ -59,21 +59,22 @@ class DokumenController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 		$id_ketua = Yii::app()->user->id;	
-		$URL_AVATAR = '/../assets/dokumen/';
 		$lab = Lab::model()->find("id_ketua=:x",array("x"=>$id_ketua));
+		$URL_AVATAR = '/../assets/dokumen/'.$lab->id."/";
+		if (!is_dir(Yii::app()->basePath .$URL_AVATAR)){
+			mkdir(Yii::app()->basePath .$URL_AVATAR);
+		}
 		if(isset($_POST['Dokumen']))
 		{
 			$model->attributes=$_POST['Dokumen'];
-			//$model->isi = $_POST['Dokumen']['isi'];
-			echo var_dump($_POST);//return;
 			$model->id_lab = $lab->id;
 			$model->waktu = date("Y-m-d H:i:s");	
 			$model->isi = CUploadedFile::getInstance($model, 'isi');	
-			//echo $model->isi."##";
-			//echo var_dump($model);return;
-			//echo var_dump(Yii::app()->basePath .$URL_AVATAR.$model->isi->getName()); return;
 			if ($model->validate()){
-				$model->isi->saveAs(Yii::app()->basePath .$URL_AVATAR.$model->isi->getName());
+				//echo var_dump($model);
+				//echo Yii::app()->basePath .$URL_AVATAR.$model->nama.".".$model->isi->getExtensionName(); return;
+				$model->isi->saveAs(Yii::app()->basePath .$URL_AVATAR.$model->nama.".".$model->isi->getExtensionName());
+				$model->isi = $model->nama.".".$model->isi->getExtensionName();
 			}
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
@@ -93,6 +94,11 @@ class DokumenController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
+		$URL_AVATAR = '/../assets/dokumen/'.$model->id_lab."/";
+		$delete = Yii::app()->basePath.$URL_AVATAR.$model->isi;
+		//echo $delete;
+		//echo var_dump($model);
+		//echo $model->isNewRecord ? "benar" : "salah";
 		$id_ketua = Yii::app()->user->id;	
 		$lab = Lab::model()->find("id_ketua=:x",array("x"=>$id_ketua));
 		// Uncomment the following line if AJAX validation is needed
@@ -102,7 +108,16 @@ class DokumenController extends Controller
 		{
 			$model->attributes=$_POST['Dokumen'];
 			$model->id_lab = $lab->id;
-			$model->waktu = date("Y-m-d H:i:s");	
+			$model->waktu = date("Y-m-d H:i:s");
+			$model->isi = CUploadedFile::getInstance($model, 'isi');
+			$link = Yii::app()->basePath.$URL_AVATAR.$model->isi;
+			echo $link;
+			if ($model->validate()){
+    			unlink($delete);         
+			   //return;
+				$model->isi->saveAs(Yii::app()->basePath .$URL_AVATAR.$model->nama.".".$model->isi->getExtensionName());
+				$model->isi = $model->nama.".".$model->isi->getExtensionName();
+			}	
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -120,7 +135,10 @@ class DokumenController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
+		$model  = $this->loadModel($id);
+	 	$link   = Yii::app()->basePath.$URL_AVATAR.$model->isi;
+	 	unlink($link);
+	 	$model->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
@@ -203,7 +221,7 @@ class DokumenController extends Controller
         $pdf->AddPage();
  
  		$html = "                                            ";
-        $html .= "<h1 style='margin-bottom:100px;'>List Dokumen Lab&nbsp;".$lab->nama."</h1><br>";
+        $html .= "<h1 style='margin-bottom:100px;'>Daftar Dokumen Lab&nbsp;".$lab->nama."</h1><br>";
         $pdf->writeHTML($html, true, false, true, false, 'C');
         $header = array('ID', 'Judul', 'Waktu', 'Nama Lab', 'Isi Dokumen'); //TODO:you can change this Header information according to your need.Also create a Dynamic Header.
  

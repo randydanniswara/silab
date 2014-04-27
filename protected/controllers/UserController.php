@@ -111,12 +111,14 @@ class UserController extends Controller
 			$labs->id_lab = $_POST['LabUser']['id_lab'];
 			$labs->id_user = $model->id;
 			//echo var_dump($model);return;
+			//echo $labs->isNewRecord ? "BARU" : "LAMA"; return;
 			if ($r == 2){
 				$blah = Lab::model()->findByPk($_POST['LabUser']['id_lab']);
 				$blah->id_ketua = $model->id;
 				//echo var_dump($blah);return;
 				$blah->update();
 			}
+			$labs->update();
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}

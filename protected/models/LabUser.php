@@ -93,4 +93,5 @@ class LabUser extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
 }

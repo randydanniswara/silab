@@ -15,11 +15,10 @@ $this->pageTitle=Yii::app()->name;
 </ul>
 <?php
 	echo Yii::app()->user->getRole()."<br>";
-
 	if ($role != NULL) {
-		if (Yii::app()->user->isAdmin($role->id)) {
+		if (Yii::app()->user->isAdmin($role->role)) {
 			echo "admin";
-		} else if (Yii::app()->user->isKetua($role->id)){
+		} else if (Yii::app()->user->isKetua($role->role)){
 			echo "ketua";
 		} else echo "anggota";
 	}

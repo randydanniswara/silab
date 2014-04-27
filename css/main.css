@@ -21,6 +21,17 @@ body
 	background: #EFEFEF;
 }
 
+.button {
+	border: 1px solid #3498db;
+	padding: 3px;
+	text-decoration: none;
+	margin-bottom: 10px;
+}
+
+.button:hover {
+	text-decoration: underline!important;
+}
+
 #page
 {
 	margin-top: 5px;

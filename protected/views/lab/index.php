@@ -18,3 +18,5 @@ $this->menu=array(
 	'dataProvider'=>$dataProvider,
 	'itemView'=>'_view',
 )); ?>
+
+	<?php echo var_dump($list);?>
