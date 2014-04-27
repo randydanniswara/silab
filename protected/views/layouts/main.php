@@ -47,6 +47,7 @@
 				array('label'=>'Profil','url'=>array('/profil/index'),'visible'=>!Yii::app()->user->isGuest),
 				array('label'=>'User','url'=>array('/user/index'),'visible'=>Yii::app()->user->getRole()<=2),
 				array('label'=>'Dokumen','url'=>array('/dokumen/index'),'visible'=>Yii::app()->user->getRole()==2),
+				array('label'=>'Publikasi','url'=>array('/publikasi/index'),'visible'=>!Yii::app()->user->isGuest),
 				array('label'=>'Kegiatan','url'=>array('/kegiatan/index'),'visible'=>!Yii::app()->user->isGuest),
 				array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
 				array('label'=>'LogBook','url'=>array('logbook/index'),'visible'=>Yii::app()->user->getRole()==3 && !Yii::app()->user->isGuest),

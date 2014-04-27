@@ -32,9 +32,13 @@ class Publikasi extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id, tahun, pengarang, judul', 'required'),
-			array('id, tahun, id_lab', 'numerical', 'integerOnly'=>true),
-			array('pengarang, judul', 'length', 'max'=>50),
+			array('tahun, pengarang, judul', 'required'),
+			array('tahun, id_lab', 'numerical', 'integerOnly'=>true),
+			array('pengarang', 'length', 'max'=>100),
+			array('judul', 'length', 'max'=>100),
+			array('judul', 'safe'),
+			array('judul','file','types'=>'xls, doc, txt, pdf, xlsx, docx', 'maxSize'=>10*1024*1024,'allowEmpty'=>true),
+			array('judul', 'length', 'max'=>255, 'on'=>'insert,update'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, tahun, pengarang, judul, id_lab', 'safe', 'on'=>'search'),
@@ -50,7 +54,7 @@ class Publikasi extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'idLab' => array(self::BELONGS_TO, 'Lab', 'id_lab'),
-			'users' => array(self::MANY_MANY, 'User', 'Publikasi_Anggota(id_publikasi, id_user)'),
+			'users' => array(self::MANY_MANY, 'User', 'Publikasi_User(id_publikasi, id_user)'),
 		);
 	}
 

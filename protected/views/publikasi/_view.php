@@ -23,7 +23,8 @@
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('id_lab')); ?>:</b>
 	<?php echo CHtml::encode($data->id_lab); ?>
-	<br />
+	<br /><br/>
 
-
+	<a class="button" href="/propensi/assets/publikasi/<?php echo $data->id_lab."/".$data->judul;?>">Download Dokumen</a>
+	<?php echo CHtml::link('Update File',array('publikasi/update','id'=>$data->id),array('class'=>'button'));  ?>
 </div>

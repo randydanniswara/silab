@@ -66,16 +66,31 @@ class PublikasiController extends Controller
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
+		$id_user = Yii::app()->user->id;	
+		$lab = LabUser::model()->find("id_user=:x",array("x"=>$id_user));
+		$lab = Lab::model()->find("id=:p",array("p"=>$lab->id_lab));
+		$URL = Yii::app()->basePath .'/../assets/publikasi/'.$lab->id."/";
+		// echo $URL ;return;
 		if(isset($_POST['Publikasi']))
 		{
 			$model->attributes=$_POST['Publikasi'];
+			$model->id_lab = $lab->id;
+			$model->judul = CUploadedFile::getInstance($model,'judul');
+			$model->validate();
+			if (!is_dir($URL)) {
+				mkdir($URL);
+			}
+			//echo $URL.$model->judul.".".$model->judul->getExtensionName();return;
+			$model->judul->saveAs($URL.$model->judul);
+			$model->judul = $model->judul->getName();
+			//echo var_dump($model);return;
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
+			'lab'=>$lab,
 		));
 	}
 
@@ -87,19 +102,29 @@ class PublikasiController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
-
+		$lab = Lab::model()->find("id=:p",array("p"=>$model->id_lab));
+		$URL = Yii::app()->basePath .'/../assets/publikasi/'.$lab->id."/";
+		$delete = $URL.$model->judul;
+		//echo $delete;
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
-
 		if(isset($_POST['Publikasi']))
 		{
 			$model->attributes=$_POST['Publikasi'];
-			if($model->save())
+			$model->judul = CUploadedFile::getInstance($model,'judul');
+			$model->validate();
+			$model->judul->saveAs($URL.$model->judul);
+			$model->judul = $model->judul->getName();
+			unlink($delete);
+			//echo var_dump($model);return;
+			if($model->save()) {
 				$this->redirect(array('view','id'=>$model->id));
+			}
 		}
 
 		$this->render('update',array(
 			'model'=>$model,
+			'lab'=>$lab,
 		));
 	}
 
@@ -110,8 +135,10 @@ class PublikasiController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		$this->loadModel($id)->delete();
-
+		$model = $this->loadModel($id);
+		$link  = Yii::app()->basePath.$URL_AVATAR.$model->judul;
+	 	unlink($link);
+	 	$model->delete();
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));

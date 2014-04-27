@@ -14539,3 +14539,310 @@ Stack trace:
 REQUEST_URI=/propensi/lab/index
 HTTP_REFERER=http://localhost/propensi/dokumen/index
 ---
+2014/04/27 13:45:29 [error] [exception.CException] exception 'CException' with message 'Property "Publikasi.ttl" is not defined.' in D:\xampp\htdocs\propensi\framework\base\CComponent.php:130
+Stack trace:
+#0 D:\xampp\htdocs\propensi\framework\db\ar\CActiveRecord.php(145): CComponent->__get('ttl')
+#1 D:\xampp\htdocs\propensi\framework\web\helpers\CHtml.php(2529): CActiveRecord->__get('ttl')
+#2 D:\xampp\htdocs\propensi\framework\web\helpers\CHtml.php(2252): CHtml::resolveValue(Object(Publikasi), 'ttl')
+#3 D:\xampp\htdocs\propensi\framework\web\helpers\CHtml.php(1434): CHtml::activeInputField('text', Object(Publikasi), 'ttl', Array)
+#4 D:\xampp\htdocs\propensi\framework\zii\widgets\jui\CJuiDatePicker.php(84): CHtml::activeTextField(Object(Publikasi), 'ttl', Array)
+#5 D:\xampp\htdocs\propensi\framework\web\CBaseController.php(173): CJuiDatePicker->run()
+#6 D:\xampp\htdocs\propensi\protected\views\publikasi\_form.php(33): CBaseController->widget('zii.widgets.jui...', Array)
+#7 D:\xampp\htdocs\propensi\framework\web\CBaseController.php(126): require('D:\xampp\htdocs...')
+#8 D:\xampp\htdocs\propensi\framework\web\CBaseController.php(95): CBaseController->renderInternal('D:\xampp\htdocs...', Array, true)
+#9 D:\xampp\htdocs\propensi\framework\web\CController.php(869): CBaseController->renderFile('D:\xampp\htdocs...', Array, true)
+#10 D:\xampp\htdocs\propensi\protected\views\publikasi\create.php(18): CController->renderPartial('_form', Array)
+#11 D:\xampp\htdocs\propensi\framework\web\CBaseController.php(126): require('D:\xampp\htdocs...')
+#12 D:\xampp\htdocs\propensi\framework\web\CBaseController.php(95): CBaseController->renderInternal('D:\xampp\htdocs...', Array, true)
+#13 D:\xampp\htdocs\propensi\framework\web\CController.php(869): CBaseController->renderFile('D:\xampp\htdocs...', Array, true)
+#14 D:\xampp\htdocs\propensi\framework\web\CController.php(782): CController->renderPartial('create', Array, true)
+#15 D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php(79): CController->render('create', Array)
+#16 D:\xampp\htdocs\propensi\framework\web\actions\CInlineAction.php(49): PublikasiController->actionCreate()
+#17 D:\xampp\htdocs\propensi\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#18 D:\xampp\htdocs\propensi\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#19 D:\xampp\htdocs\propensi\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#20 D:\xampp\htdocs\propensi\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#21 D:\xampp\htdocs\propensi\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#22 D:\xampp\htdocs\propensi\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#23 D:\xampp\htdocs\propensi\framework\web\CController.php(291): CFilterChain->run()
+#24 D:\xampp\htdocs\propensi\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#25 D:\xampp\htdocs\propensi\framework\web\CWebApplication.php(282): CController->run('create')
+#26 D:\xampp\htdocs\propensi\framework\web\CWebApplication.php(141): CWebApplication->runController('publikasi/creat...')
+#27 D:\xampp\htdocs\propensi\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#28 D:\xampp\htdocs\propensi\index.php(13): CApplication->run()
+#29 {main}
+REQUEST_URI=/propensi/publikasi/create
+HTTP_REFERER=http://localhost/propensi/publikasi/index
+---
+2014/04/27 13:58:41 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in D:\xampp\htdocs\propensi\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 D:\xampp\htdocs\propensi\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(ExtUser), 'You are not aut...')
+#1 D:\xampp\htdocs\propensi\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 D:\xampp\htdocs\propensi\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 D:\xampp\htdocs\propensi\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 D:\xampp\htdocs\propensi\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 D:\xampp\htdocs\propensi\framework\web\CController.php(291): CFilterChain->run()
+#6 D:\xampp\htdocs\propensi\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 D:\xampp\htdocs\propensi\framework\web\CWebApplication.php(282): CController->run('update')
+#8 D:\xampp\htdocs\propensi\framework\web\CWebApplication.php(141): CWebApplication->runController('user/update')
+#9 D:\xampp\htdocs\propensi\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 D:\xampp\htdocs\propensi\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/propensi/user/update/1
+HTTP_REFERER=http://localhost/propensi/user/index
+---
+2014/04/27 13:58:46 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in D:\xampp\htdocs\propensi\framework\web\auth\CAccessControlFilter.php:182
+Stack trace:
+#0 D:\xampp\htdocs\propensi\framework\web\auth\CAccessControlFilter.php(145): CAccessControlFilter->accessDenied(Object(ExtUser), 'You are not aut...')
+#1 D:\xampp\htdocs\propensi\framework\web\filters\CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 D:\xampp\htdocs\propensi\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 D:\xampp\htdocs\propensi\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 D:\xampp\htdocs\propensi\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 D:\xampp\htdocs\propensi\framework\web\CController.php(291): CFilterChain->run()
+#6 D:\xampp\htdocs\propensi\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 D:\xampp\htdocs\propensi\framework\web\CWebApplication.php(282): CController->run('create')
+#8 D:\xampp\htdocs\propensi\framework\web\CWebApplication.php(141): CWebApplication->runController('user/create')
+#9 D:\xampp\htdocs\propensi\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#10 D:\xampp\htdocs\propensi\index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/propensi/user/create
+HTTP_REFERER=http://localhost/propensi/user/index
+---
+2014/04/27 14:17:55 [error] [php] Undefined variable: lab (D:\xampp\htdocs\propensi\protected\views\publikasi\_form.php:47)
+Stack trace:
+#0 D:\xampp\htdocs\propensi\framework\web\CController.php(869): PublikasiController->renderFile()
+#1 D:\xampp\htdocs\propensi\protected\views\publikasi\create.php(18): PublikasiController->renderPartial()
+#2 D:\xampp\htdocs\propensi\framework\web\CBaseController.php(126): require()
+#3 D:\xampp\htdocs\propensi\framework\web\CBaseController.php(95): PublikasiController->renderInternal()
+#4 D:\xampp\htdocs\propensi\framework\web\CController.php(869): PublikasiController->renderFile()
+#5 D:\xampp\htdocs\propensi\framework\web\CController.php(782): PublikasiController->renderPartial()
+#6 D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php(83): PublikasiController->render()
+#7 D:\xampp\htdocs\propensi\framework\web\actions\CInlineAction.php(49): PublikasiController->actionCreate()
+#8 D:\xampp\htdocs\propensi\framework\web\CController.php(308): CInlineAction->runWithParams()
+#9 D:\xampp\htdocs\propensi\framework\web\filters\CFilterChain.php(133): PublikasiController->runAction()
+#10 D:\xampp\htdocs\propensi\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#11 D:\xampp\htdocs\propensi\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#12 D:\xampp\htdocs\propensi\framework\web\filters\CInlineFilter.php(58): PublikasiController->filterAccessControl()
+#13 D:\xampp\htdocs\propensi\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#14 D:\xampp\htdocs\propensi\framework\web\CController.php(291): CFilterChain->run()
+#15 D:\xampp\htdocs\propensi\framework\web\CController.php(265): PublikasiController->runActionWithFilters()
+#16 D:\xampp\htdocs\propensi\framework\web\CWebApplication.php(282): PublikasiController->run()
+#17 D:\xampp\htdocs\propensi\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#18 D:\xampp\htdocs\propensi\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#19 D:\xampp\htdocs\propensi\index.php(13): CWebApplication->run()
+REQUEST_URI=/propensi/publikasi/create
+in D:\xampp\htdocs\propensi\protected\views\publikasi\_form.php (47)
+in D:\xampp\htdocs\propensi\protected\views\publikasi\create.php (18)
+in D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php (83)
+2014/04/27 14:52:50 [warning] [application] Failed to set unsafe attribute "judul" of "Publikasi".
+in D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php (75)
+in D:\xampp\htdocs\propensi\index.php (13)
+2014/04/27 14:55:14 [warning] [application] Failed to set unsafe attribute "judul" of "Publikasi".
+in D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php (76)
+in D:\xampp\htdocs\propensi\index.php (13)
+2014/04/27 14:55:14 [error] [exception.CException] exception 'CException' with message 'Property "Publikasi.waktu" is not defined.' in D:\xampp\htdocs\propensi\framework\base\CComponent.php:173
+Stack trace:
+#0 D:\xampp\htdocs\propensi\framework\db\ar\CActiveRecord.php(161): CComponent->__set('waktu', '2014-04-27 14:5...')
+#1 D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php(77): CActiveRecord->__set('waktu', '2014-04-27 14:5...')
+#2 D:\xampp\htdocs\propensi\framework\web\actions\CInlineAction.php(49): PublikasiController->actionCreate()
+#3 D:\xampp\htdocs\propensi\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 D:\xampp\htdocs\propensi\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#5 D:\xampp\htdocs\propensi\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 D:\xampp\htdocs\propensi\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 D:\xampp\htdocs\propensi\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 D:\xampp\htdocs\propensi\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 D:\xampp\htdocs\propensi\framework\web\CController.php(291): CFilterChain->run()
+#10 D:\xampp\htdocs\propensi\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 D:\xampp\htdocs\propensi\framework\web\CWebApplication.php(282): CController->run('create')
+#12 D:\xampp\htdocs\propensi\framework\web\CWebApplication.php(141): CWebApplication->runController('publikasi/creat...')
+#13 D:\xampp\htdocs\propensi\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#14 D:\xampp\htdocs\propensi\index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/propensi/publikasi/create
+HTTP_REFERER=http://localhost/propensi/publikasi/create
+---
+2014/04/27 14:55:26 [warning] [application] Failed to set unsafe attribute "judul" of "Publikasi".
+in D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php (76)
+in D:\xampp\htdocs\propensi\index.php (13)
+2014/04/27 14:56:36 [warning] [application] Failed to set unsafe attribute "judul" of "Publikasi".
+in D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php (76)
+in D:\xampp\htdocs\propensi\index.php (13)
+2014/04/27 14:57:16 [warning] [application] Failed to set unsafe attribute "judul" of "Publikasi".
+in D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php (76)
+in D:\xampp\htdocs\propensi\index.php (13)
+2014/04/27 14:57:30 [warning] [application] Failed to set unsafe attribute "judul" of "Publikasi".
+in D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php (76)
+in D:\xampp\htdocs\propensi\index.php (13)
+2014/04/27 14:57:42 [warning] [application] Failed to set unsafe attribute "judul" of "Publikasi".
+in D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php (76)
+in D:\xampp\htdocs\propensi\index.php (13)
+2014/04/27 15:05:44 [warning] [application] Failed to set unsafe attribute "judul" of "Publikasi".
+in D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php (76)
+in D:\xampp\htdocs\propensi\index.php (13)
+2014/04/27 15:06:57 [warning] [application] Failed to set unsafe attribute "judul" of "Publikasi".
+in D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php (76)
+in D:\xampp\htdocs\propensi\index.php (13)
+2014/04/27 15:06:57 [error] [php] move_uploaded_file(D:\xampp\htdocs\propensi\protected/../assets/publikasi/12/6 Ways to Hack a Web App.pdf.pdf) [<a href='function.move-uploaded-file'>function.move-uploaded-file</a>]: failed to open stream: No such file or directory (D:\xampp\htdocs\propensi\framework\web\CUploadedFile.php:198)
+Stack trace:
+#0 D:\xampp\htdocs\propensi\framework\web\actions\CInlineAction.php(49): PublikasiController->actionCreate()
+#1 D:\xampp\htdocs\propensi\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 D:\xampp\htdocs\propensi\framework\web\filters\CFilterChain.php(133): PublikasiController->runAction()
+#3 D:\xampp\htdocs\propensi\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#4 D:\xampp\htdocs\propensi\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#5 D:\xampp\htdocs\propensi\framework\web\filters\CInlineFilter.php(58): PublikasiController->filterAccessControl()
+#6 D:\xampp\htdocs\propensi\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#7 D:\xampp\htdocs\propensi\framework\web\CController.php(291): CFilterChain->run()
+#8 D:\xampp\htdocs\propensi\framework\web\CController.php(265): PublikasiController->runActionWithFilters()
+#9 D:\xampp\htdocs\propensi\framework\web\CWebApplication.php(282): PublikasiController->run()
+#10 D:\xampp\htdocs\propensi\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#11 D:\xampp\htdocs\propensi\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#12 D:\xampp\htdocs\propensi\index.php(13): CWebApplication->run()
+REQUEST_URI=/propensi/publikasi/create
+in D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php (84)
+in D:\xampp\htdocs\propensi\index.php (13)
+2014/04/27 15:07:19 [warning] [application] Failed to set unsafe attribute "judul" of "Publikasi".
+in D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php (76)
+in D:\xampp\htdocs\propensi\index.php (13)
+2014/04/27 15:07:38 [warning] [application] Failed to set unsafe attribute "judul" of "Publikasi".
+in D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php (76)
+in D:\xampp\htdocs\propensi\index.php (13)
+2014/04/27 15:07:51 [warning] [application] Failed to set unsafe attribute "judul" of "Publikasi".
+in D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php (76)
+in D:\xampp\htdocs\propensi\index.php (13)
+2014/04/27 15:10:45 [warning] [application] Failed to set unsafe attribute "judul" of "Publikasi".
+in D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php (76)
+in D:\xampp\htdocs\propensi\index.php (13)
+2014/04/27 15:11:03 [warning] [application] Failed to set unsafe attribute "judul" of "Publikasi".
+in D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php (76)
+in D:\xampp\htdocs\propensi\index.php (13)
+2014/04/27 15:11:11 [warning] [application] Failed to set unsafe attribute "judul" of "Publikasi".
+in D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php (76)
+in D:\xampp\htdocs\propensi\index.php (13)
+2014/04/27 15:13:32 [warning] [application] Failed to set unsafe attribute "judul" of "Publikasi".
+in D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php (76)
+in D:\xampp\htdocs\propensi\index.php (13)
+2014/04/27 15:19:43 [error] [php] Undefined variable: lab (D:\xampp\htdocs\propensi\protected\views\publikasi\_form.php:50)
+Stack trace:
+#0 D:\xampp\htdocs\propensi\framework\web\CController.php(869): PublikasiController->renderFile()
+#1 D:\xampp\htdocs\propensi\protected\views\publikasi\update.php(21): PublikasiController->renderPartial()
+#2 D:\xampp\htdocs\propensi\framework\web\CBaseController.php(126): require()
+#3 D:\xampp\htdocs\propensi\framework\web\CBaseController.php(95): PublikasiController->renderInternal()
+#4 D:\xampp\htdocs\propensi\framework\web\CController.php(869): PublikasiController->renderFile()
+#5 D:\xampp\htdocs\propensi\framework\web\CController.php(782): PublikasiController->renderPartial()
+#6 D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php(118): PublikasiController->render()
+#7 unknown(0): PublikasiController->actionUpdate()
+#8 D:\xampp\htdocs\propensi\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#9 D:\xampp\htdocs\propensi\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#10 D:\xampp\htdocs\propensi\framework\web\CController.php(308): CInlineAction->runWithParams()
+#11 D:\xampp\htdocs\propensi\framework\web\filters\CFilterChain.php(133): PublikasiController->runAction()
+#12 D:\xampp\htdocs\propensi\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#13 D:\xampp\htdocs\propensi\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#14 D:\xampp\htdocs\propensi\framework\web\filters\CInlineFilter.php(58): PublikasiController->filterAccessControl()
+#15 D:\xampp\htdocs\propensi\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#16 D:\xampp\htdocs\propensi\framework\web\CController.php(291): CFilterChain->run()
+#17 D:\xampp\htdocs\propensi\framework\web\CController.php(265): PublikasiController->runActionWithFilters()
+#18 D:\xampp\htdocs\propensi\framework\web\CWebApplication.php(282): PublikasiController->run()
+#19 D:\xampp\htdocs\propensi\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#20 D:\xampp\htdocs\propensi\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#21 D:\xampp\htdocs\propensi\index.php(13): CWebApplication->run()
+REQUEST_URI=/propensi/publikasi/update/1
+in D:\xampp\htdocs\propensi\protected\views\publikasi\_form.php (50)
+in D:\xampp\htdocs\propensi\protected\views\publikasi\update.php (21)
+in D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php (118)
+2014/04/27 15:23:01 [error] [exception.CException] exception 'CException' with message 'Property "Publikasi.isi" is not defined.' in D:\xampp\htdocs\propensi\framework\base\CComponent.php:130
+Stack trace:
+#0 D:\xampp\htdocs\propensi\framework\db\ar\CActiveRecord.php(145): CComponent->__get('isi')
+#1 D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php(107): CActiveRecord->__get('isi')
+#2 [internal function]: PublikasiController->actionUpdate('1')
+#3 D:\xampp\htdocs\propensi\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs(Object(PublikasiController), Array)
+#4 D:\xampp\htdocs\propensi\framework\web\actions\CInlineAction.php(47): CAction->runWithParamsInternal(Object(PublikasiController), Object(ReflectionMethod), Array)
+#5 D:\xampp\htdocs\propensi\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#6 D:\xampp\htdocs\propensi\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#7 D:\xampp\htdocs\propensi\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 D:\xampp\htdocs\propensi\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#9 D:\xampp\htdocs\propensi\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#10 D:\xampp\htdocs\propensi\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#11 D:\xampp\htdocs\propensi\framework\web\CController.php(291): CFilterChain->run()
+#12 D:\xampp\htdocs\propensi\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#13 D:\xampp\htdocs\propensi\framework\web\CWebApplication.php(282): CController->run('update')
+#14 D:\xampp\htdocs\propensi\framework\web\CWebApplication.php(141): CWebApplication->runController('publikasi/updat...')
+#15 D:\xampp\htdocs\propensi\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#16 D:\xampp\htdocs\propensi\index.php(13): CApplication->run()
+#17 {main}
+REQUEST_URI=/propensi/publikasi/update/1
+HTTP_REFERER=http://localhost/propensi/publikasi/index
+---
+2014/04/27 15:23:57 [error] [php] Undefined variable: lab (D:\xampp\htdocs\propensi\protected\views\publikasi\_form.php:50)
+Stack trace:
+#0 D:\xampp\htdocs\propensi\framework\web\CController.php(869): PublikasiController->renderFile()
+#1 D:\xampp\htdocs\propensi\protected\views\publikasi\update.php(21): PublikasiController->renderPartial()
+#2 D:\xampp\htdocs\propensi\framework\web\CBaseController.php(126): require()
+#3 D:\xampp\htdocs\propensi\framework\web\CBaseController.php(95): PublikasiController->renderInternal()
+#4 D:\xampp\htdocs\propensi\framework\web\CController.php(869): PublikasiController->renderFile()
+#5 D:\xampp\htdocs\propensi\framework\web\CController.php(782): PublikasiController->renderPartial()
+#6 D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php(121): PublikasiController->render()
+#7 unknown(0): PublikasiController->actionUpdate()
+#8 D:\xampp\htdocs\propensi\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#9 D:\xampp\htdocs\propensi\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#10 D:\xampp\htdocs\propensi\framework\web\CController.php(308): CInlineAction->runWithParams()
+#11 D:\xampp\htdocs\propensi\framework\web\filters\CFilterChain.php(133): PublikasiController->runAction()
+#12 D:\xampp\htdocs\propensi\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#13 D:\xampp\htdocs\propensi\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#14 D:\xampp\htdocs\propensi\framework\web\filters\CInlineFilter.php(58): PublikasiController->filterAccessControl()
+#15 D:\xampp\htdocs\propensi\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#16 D:\xampp\htdocs\propensi\framework\web\CController.php(291): CFilterChain->run()
+#17 D:\xampp\htdocs\propensi\framework\web\CController.php(265): PublikasiController->runActionWithFilters()
+#18 D:\xampp\htdocs\propensi\framework\web\CWebApplication.php(282): PublikasiController->run()
+#19 D:\xampp\htdocs\propensi\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#20 D:\xampp\htdocs\propensi\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#21 D:\xampp\htdocs\propensi\index.php(13): CWebApplication->run()
+REQUEST_URI=/propensi/publikasi/update/1
+in D:\xampp\htdocs\propensi\protected\views\publikasi\_form.php (50)
+in D:\xampp\htdocs\propensi\protected\views\publikasi\update.php (21)
+in D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php (121)
+2014/04/27 15:24:16 [error] [php] Undefined variable: lab (D:\xampp\htdocs\propensi\protected\views\publikasi\_form.php:50)
+Stack trace:
+#0 D:\xampp\htdocs\propensi\framework\web\CController.php(869): PublikasiController->renderFile()
+#1 D:\xampp\htdocs\propensi\protected\views\publikasi\update.php(21): PublikasiController->renderPartial()
+#2 D:\xampp\htdocs\propensi\framework\web\CBaseController.php(126): require()
+#3 D:\xampp\htdocs\propensi\framework\web\CBaseController.php(95): PublikasiController->renderInternal()
+#4 D:\xampp\htdocs\propensi\framework\web\CController.php(869): PublikasiController->renderFile()
+#5 D:\xampp\htdocs\propensi\framework\web\CController.php(782): PublikasiController->renderPartial()
+#6 D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php(122): PublikasiController->render()
+#7 unknown(0): PublikasiController->actionUpdate()
+#8 D:\xampp\htdocs\propensi\framework\web\actions\CAction.php(108): ReflectionMethod->invokeArgs()
+#9 D:\xampp\htdocs\propensi\framework\web\actions\CInlineAction.php(47): CInlineAction->runWithParamsInternal()
+#10 D:\xampp\htdocs\propensi\framework\web\CController.php(308): CInlineAction->runWithParams()
+#11 D:\xampp\htdocs\propensi\framework\web\filters\CFilterChain.php(133): PublikasiController->runAction()
+#12 D:\xampp\htdocs\propensi\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#13 D:\xampp\htdocs\propensi\framework\web\CController.php(1145): CAccessControlFilter->filter()
+#14 D:\xampp\htdocs\propensi\framework\web\filters\CInlineFilter.php(58): PublikasiController->filterAccessControl()
+#15 D:\xampp\htdocs\propensi\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#16 D:\xampp\htdocs\propensi\framework\web\CController.php(291): CFilterChain->run()
+#17 D:\xampp\htdocs\propensi\framework\web\CController.php(265): PublikasiController->runActionWithFilters()
+#18 D:\xampp\htdocs\propensi\framework\web\CWebApplication.php(282): PublikasiController->run()
+#19 D:\xampp\htdocs\propensi\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#20 D:\xampp\htdocs\propensi\framework\base\CApplication.php(180): CWebApplication->processRequest()
+#21 D:\xampp\htdocs\propensi\index.php(13): CWebApplication->run()
+REQUEST_URI=/propensi/publikasi/update/1
+in D:\xampp\htdocs\propensi\protected\views\publikasi\_form.php (50)
+in D:\xampp\htdocs\propensi\protected\views\publikasi\update.php (21)
+in D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php (122)
+2014/04/27 15:25:15 [warning] [application] Failed to set unsafe attribute "judul" of "Publikasi".
+in D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php (113)
+in D:\xampp\htdocs\propensi\index.php (13)
+2014/04/27 15:25:27 [warning] [application] Failed to set unsafe attribute "judul" of "Publikasi".
+in D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php (113)
+in D:\xampp\htdocs\propensi\index.php (13)
+2014/04/27 15:26:18 [warning] [application] Failed to set unsafe attribute "judul" of "Publikasi".
+in D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php (113)
+in D:\xampp\htdocs\propensi\index.php (13)
+2014/04/27 15:26:39 [warning] [application] Failed to set unsafe attribute "judul" of "Publikasi".
+in D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php (113)
+in D:\xampp\htdocs\propensi\index.php (13)
+2014/04/27 15:27:07 [warning] [application] Failed to set unsafe attribute "judul" of "Publikasi".
+in D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php (113)
+in D:\xampp\htdocs\propensi\index.php (13)
+2014/04/27 15:29:59 [warning] [application] Failed to set unsafe attribute "judul" of "Publikasi".
+in D:\xampp\htdocs\propensi\protected\controllers\PublikasiController.php (113)
+in D:\xampp\htdocs\propensi\index.php (13)

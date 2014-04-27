@@ -29,7 +29,8 @@ body
 }
 
 .button:hover {
-	text-decoration: underline!important;
+	background: #3498db!important;
+	color : white !important;
 }
 
 #page

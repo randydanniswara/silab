@@ -13,6 +13,9 @@
 	// There is a call to performAjaxValidation() commented in generated controller code.
 	// See class documentation of CActiveForm for details on this.
 	'enableAjaxValidation'=>false,
+	'htmlOptions'=> array(
+		'enctype'=>'multipart/form-data',
+	),
 )); ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
@@ -20,32 +23,31 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'id'); ?>
-		<?php echo $form->textField($model,'id'); ?>
-		<?php echo $form->error($model,'id'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->labelEx($model,'tahun'); ?>
-		<?php echo $form->textField($model,'tahun'); ?>
+		<select name="Publikasi[tahun]" id="Publikasi_tahun">
+			<?php for ($i = intval(date('Y'));$i>=1945;--$i) {?>
+				<option value="<?php echo $i;?>"><?php echo $i;?></option>
+			<?php } ?>
+		</select>
 		<?php echo $form->error($model,'tahun'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'pengarang'); ?>
-		<?php echo $form->textField($model,'pengarang',array('size'=>50,'maxlength'=>50)); ?>
+		<?php echo $form->textField($model,'pengarang',array('size'=>60,'maxlength'=>100)); ?>
 		<?php echo $form->error($model,'pengarang'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'judul'); ?>
-		<?php echo $form->textField($model,'judul',array('size'=>50,'maxlength'=>50)); ?>
+		<?php echo $form->labelEx($model,'File Publikasi'); ?>
+		<span style="color:blue;">pastikan nama file sesuai dengan isi file yang akan diunggah</span><br>
+		<?php echo $form->fileField($model,'judul'); ?>
 		<?php echo $form->error($model,'judul'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'id_lab'); ?>
-		<?php echo $form->textField($model,'id_lab'); ?>
+		<?php echo $form->labelEx($model,'Nama Lab'); ?>
+		<?php echo $form->textField($model,'id_lab',array('value'=>$lab->nama,'disabled'=>'disabled')); ?>
 		<?php echo $form->error($model,'id_lab'); ?>
 	</div>
 

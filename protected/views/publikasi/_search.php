@@ -23,7 +23,7 @@
 
 	<div class="row">
 		<?php echo $form->label($model,'pengarang'); ?>
-		<?php echo $form->textField($model,'pengarang',array('size'=>50,'maxlength'=>50)); ?>
+		<?php echo $form->textField($model,'pengarang',array('size'=>60,'maxlength'=>100)); ?>
 	</div>
 
 	<div class="row">
