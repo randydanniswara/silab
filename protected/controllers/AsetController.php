@@ -29,7 +29,7 @@ class AsetController extends Controller
 		return array(
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('index','view'),
-				'expression'=>'$user->getRole()<=3',
+				'expression'=>'$user->getRole()<=2',
 			),
 			array ('allow',
 				'actions'=>array('admin','delete','create','update'),
@@ -129,7 +129,13 @@ class AsetController extends Controller
 	public function actionIndex()
 	{
 		if (Yii::app()->user->getRole() == 1) $this->redirect(array("/site/index"));
-		$dataProvider=new CActiveDataProvider('Aset');
+		$lab = Lab::model()->find("id_ketua=:q",array("q"=>Yii::app()->user->id));
+		//echo var_dump($lab);return;
+		$dataProvider=new CActiveDataProvider('Aset', array(
+			'criteria'=> array(
+				'condition'=>'id_lab='.$lab->id,
+			),
+		));
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));

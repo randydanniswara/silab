@@ -164,14 +164,16 @@ class User extends CActiveRecord
 		$x = User::model()->findAll('role=:p',array('p'=>'2'));
 		$list = array();
 		 foreach ($x as $key) {
-		 	$m = $key->profil->getDetail();
-		 	$tmp = ""; $po=0;
-		 	foreach ($m as $k => $v) {
-		 		if ($k == "id") $po = $v;  
-		 		if ($k =="nama_depan" || $k == "nama_belakang")	
-		 			$tmp= $tmp." ".$v;
-		 	}
-		 	$list[$po] = $tmp;
+		 	if ($key->profil) {
+			 	$m = $key->profil->getDetail();
+			 	$tmp = ""; $po=0;
+			 	foreach ($m as $k => $v) {
+			 		if ($k == "id") $po = $v;  
+			 		if ($k =="nama_depan" || $k == "nama_belakang")	
+			 			$tmp= $tmp." ".$v;
+			 	}
+			 	$list[$po] = $tmp;
+			}
 		}
 
 		return $list;

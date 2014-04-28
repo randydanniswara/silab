@@ -76,9 +76,13 @@ class LabController extends Controller
 				$this->redirect(array('view','id'=>$model->id));
 		}
 		
+		//$tmp = User::model()->findAll("role=:x",array("x"=>2));
+		$list = User::model()->getAllKetua();
 
+		//echo var_dump($list);return;
 		$this->render('create',array(
 			'model'=>$model,
+			'list'=>$list,
 		));
 	}
 
